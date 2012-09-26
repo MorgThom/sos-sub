@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions
+END
+DataExceptions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions/DataExceptions.cs
+END
+ExceptionSupers.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions/ExceptionSupers.cs
+END
+InternalConditionExceptions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions/InternalConditionExceptions.cs
+END
+SystemExceptions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions/SystemExceptions.cs
+END
+VisionExceptions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/RoboSub/!svn/ver/15/RoboSub/Exceptions/VisionExceptions.cs
+END

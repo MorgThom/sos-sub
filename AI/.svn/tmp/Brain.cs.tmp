@@ -1,0 +1,273 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using RoboSub.Internal_Model;
+using RoboSub.Movement;
+using RoboSub.Vision;
+using System.Drawing;
+using Emgu.CV;
+
+namespace RoboSub.AI
+{
+    class Brain
+    {
+        static List<Thread> processes = new List<Thread>();
+        int targetAngle = 90;//this will need to be hand coded to starting angle towards the gate //actually it's not used... right now it assumes it can see the gate well enough to blob detect it
+        int currentAngle, currentDirection;
+        static int FORWARD = 0, RIGHT = 1, LEFT = 2, UP = 3, DOWN = 4, BACKWARD = 5, STOPPED = 6;
+        double upMotionValue = 5;//this should be set to an appropriate value based on the IMU's output... or the surfacing should just be cancelled and let it float up when it's done
+
+        public static void Main()
+        {
+            new Brain();
+            //Eyes.GetCenterMass("C:/RoboSub/line.png");
+           // Eyes.AUTO_ADJUST_THRESHOLD = false;
+            //Eyes.GetCenterMass(true);
+            //System.Console.ReadLine();
+        }
+
+        Brain()
+        {
+            InitializeComponents();
+            //Thread.Sleep(30000);//wait thirty seconds before doing anything
+            DirectMotorLink.Dive();
+            Thread.Sleep(1000);
+            DirectMotorLink.KillAllMotors();
+            GoThroughArch();
+            FollowLine();
+            Bump();
+            FollowLine();
+            //Surface();//since the IMU isn't working, can't tell when the surface is hit so just rely on bouancy
+            KillEverything();
+        }
+
+        /// <summary>
+        /// Currently just runs straight forward attempting to go between the poles seen
+        /// </summary>
+        void GoThroughArch()
+        {
+            Point blobCenter = new Point(0, 0);
+            currentDirection = STOPPED;
+            DirectMotorLink.KillAllMotors();
+            while (blobCenter.X > Int16.MinValue)//min value is returned when nothing can be seen
+            {
+                blobCenter = Eyes.GetCenterMass(true);
+                if (blobCenter.X < -10)
+                {
+                    if (currentDirection != LEFT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawLeft();
+                        DirectMotorLink.DriveLeft();
+                        currentDirection = LEFT;
+                    }
+                }
+                else if (blobCenter.X > 10)
+                {
+                    if (currentDirection != RIGHT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawRight();
+                        DirectMotorLink.DriveRight();
+                        currentDirection = RIGHT;
+                    }
+                }
+                else if (blobCenter.Y > -100)
+                {
+                    if (currentDirection != DOWN)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.Dive();
+                        currentDirection = DOWN;
+                    }
+                }
+                else
+                {
+                    if (currentDirection != FORWARD)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.DriveForward();
+                        currentDirection = FORWARD;
+                    }
+                }
+                Thread.Sleep(50);//only do something new every half second
+            }
+            DirectMotorLink.KillAllMotors();
+        }
+
+        void FollowLine()
+        {
+            Point blobCenter = new Point(0, 0);
+            currentDirection = STOPPED;
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.DriveForward();
+            do//move until a blob is seen
+            {
+                blobCenter = Eyes.GetCenterMass(false);
+            } while (blobCenter.X == Int32.MinValue);
+            DirectMotorLink.KillAllMotors();
+
+            while (blobCenter.X > Int16.MinValue)//min value is returned when nothing can be seen
+            {
+                blobCenter = Eyes.GetCenterMass(false);
+                if (blobCenter.X < -10)
+                {
+                    if (currentDirection != LEFT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawLeft();
+                        DirectMotorLink.DriveLeft();
+                        currentDirection = LEFT;
+                    }
+                }
+                else if (blobCenter.X > 10)
+                {
+                    if (currentDirection != RIGHT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawRight();
+                        DirectMotorLink.DriveRight();
+                        currentDirection = RIGHT;
+                    }
+                }
+                else
+                {
+                    if (currentDirection != FORWARD)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.DriveForward();
+                        currentDirection = FORWARD;
+                    }
+                }
+                Thread.Sleep(50);//only do something new every half second
+            }
+            DirectMotorLink.KillAllMotors();
+        }
+
+        void Bump()
+        {
+            Point blobCenter = new Point(0, 0);
+            currentDirection = STOPPED;
+            DirectMotorLink.KillAllMotors();
+            while (blobCenter.X > Int16.MinValue)//min value is returned when nothing can be seen
+            {
+                blobCenter = Eyes.GetCenterMass(true);
+                if (blobCenter.X < -10)
+                {
+                    if (currentDirection != LEFT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawLeft();
+                        DirectMotorLink.DriveLeft();
+                        currentDirection = LEFT;
+                    }
+                }
+                else if (blobCenter.X > 10)
+                {
+                    if (currentDirection != RIGHT)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.YawRight();
+                        DirectMotorLink.DriveRight();
+                        currentDirection = RIGHT;
+                    }
+                }
+                else if (blobCenter.Y < -10)
+                {
+                    if (currentDirection != UP)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.Surface();
+                        currentDirection = UP;
+                    }
+                }
+                else if (blobCenter.Y > 10)
+                {
+                    if (currentDirection != DOWN)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.Dive();
+                        currentDirection = DOWN;
+                    }
+                }
+                else
+                {
+                    if (currentDirection != FORWARD)
+                    {
+                        DirectMotorLink.KillAllMotors();
+                        DirectMotorLink.DriveForward();
+                        currentDirection = FORWARD;
+                    }
+                }
+                Thread.Sleep(50);//only do something new every half second
+            }
+            DirectMotorLink.KillAllMotors();
+        }
+
+        void Surface()
+        //turned this off, but really it could just be set to run for thirty seconds or something and then cut out...
+        {
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.Surface();
+            while (IMU.zAccel > upMotionValue) { }
+            DirectMotorLink.KillAllMotors();
+        }
+
+        void InitializeComponents()
+        {
+            //processes.Add(new Thread(new IMU().ContinuousValueUpdate));
+            //processes.Add(new Thread(new ConditionsLogger().GatherDataAndOutputToFile));
+            processes.Add(new Thread(new DirectMotorLink(this).ContinuousCheckForKillSwitch));
+            DirectMotorLink.InitializeMotors();
+
+            foreach (Thread t in processes)
+            {
+                t.Start();
+            }
+        }
+
+        public void KillEverything()
+        {
+
+            DirectMotorLink.killed = true;
+            DirectMotorLink.KillAllMotors();
+            foreach (Thread t in processes)
+            {
+                t.Abort();
+                
+            }
+            Environment.Exit(0);
+        }
+
+        static int tiltMax = 10;//should be set to whatever is appropriate for the IMU
+        void AutoLevel()//this is meant to be a base example, it's a bit crude for actual use
+        {
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.RollLeft();
+            do
+            {
+            } while (IMU.yGyro > tiltMax);
+
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.RollRight();
+            do
+            {
+            } while (IMU.yGyro < -tiltMax);
+
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.PitchDown();
+            do
+            {
+            } while (IMU.zGyro > tiltMax);
+
+            DirectMotorLink.KillAllMotors();
+            DirectMotorLink.PitchUp();
+            do
+            {
+            } while (IMU.zGyro < -tiltMax);
+            DirectMotorLink.KillAllMotors();
+        }
+    }
+}

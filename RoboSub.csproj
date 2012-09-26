@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F03FA89-01D3-4E95-889E-A5ED1BD0CC57}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RoboSub</RootNamespace>
+    <AssemblyName>RoboSub</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>RoboSub.Vision.USBCamTest</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Brain.cs" />
+    <Compile Include="Display\DisplayTest.cs" />
+    <Compile Include="Display\PrimaryDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Display\PrimaryDisplay.Designer.cs">
+      <DependentUpon>PrimaryDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\DataExceptions.cs" />
+    <Compile Include="Exceptions\ExceptionSupers.cs" />
+    <Compile Include="Exceptions\InternalConditionExceptions.cs" />
+    <Compile Include="Exceptions\SystemExceptions.cs" />
+    <Compile Include="Exceptions\VisionExceptions.cs" />
+    <Compile Include="Internal Model\ConditionsLogger.cs" />
+    <Compile Include="Internal Model\IInternalConditionGatherer.cs" />
+    <Compile Include="Internal Model\IInternalConditionListener.cs" />
+    <Compile Include="Internal Model\IMU.cs" />
+    <Compile Include="Internal Model\InternalModel.cs" />
+    <Compile Include="Internal Model\ModelReturnData.cs" />
+    <Compile Include="Internal Model\WeatherBoard.cs" />
+    <Compile Include="Markers\Marker.cs" />
+    <Compile Include="MessageControl\MessagePassthrough.cs" />
+    <Compile Include="Movement\DirectMotorLink.cs" />
+    <Compile Include="Movement\DirectMotorLinkTest.cs" />
+    <Compile Include="Movement\HandCodeMotorConstants.cs" />
+    <Compile Include="Movement\InputTranslation.cs" />
+    <Compile Include="Movement\Motor.cs" />
+    <Compile Include="Movement\StopMotors.cs" />
+    <Compile Include="RemoteControl\BaseGatherer.cs" />
+    <Compile Include="RemoteControl\OutputToConsole.cs" />
+    <Compile Include="RemoteControl\Xbox360Pad.cs" />
+    <Compile Include="RSMath\CoordinateMath.cs" />
+    <Compile Include="RemoteControl\IInputGatherer.cs" />
+    <Compile Include="RemoteControl\IInputListener.cs" />
+    <Compile Include="RSMath\TemperatureMath.cs" />
+    <Compile Include="Torpedos\Torpedo.cs" />
+    <Compile Include="Vision\Eyes.cs" />
+    <Compile Include="Vision\LineDetectionFromFileTesting.cs" />
+    <Compile Include="Vision\USBCamTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Phidget21.NET, Version=2.1.8.75, Culture=neutral, PublicKeyToken=c2b1f2a3594bce52, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files\Phidgets\Phidget21.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UsbWrapper">
+      <HintPath>..\pololu_usb_sdk_101119\pololu_usb_sdk\UsbWrapper_Windows\UsbWrapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Display\PrimaryDisplay.resx">
+      <DependentUpon>PrimaryDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Emgu\emgucv-windows-x86 2.2.1.1150\Emgu.CV.UI\Emgu.CV.UI.csproj">
+      <Project>{90E78BBF-C7FE-4D8E-ADE1-75448E866FDB}</Project>
+      <Name>Emgu.CV.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Emgu\emgucv-windows-x86 2.2.1.1150\Emgu.CV\Emgu.CV.csproj">
+      <Project>{9A1A77FE-F01B-495E-87B7-4B16E4F8C908}</Project>
+      <Name>Emgu.CV</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Emgu\emgucv-windows-x86 2.2.1.1150\Emgu.Util\Emgu.Util.csproj">
+      <Project>{7C2C5325-8235-4A24-9C67-6BD79A4679E2}</Project>
+      <Name>Emgu.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\pololu_usb_sdk_101119\pololu_usb_sdk\Jrk\JrkExample\JrkExample.csproj">
+      <Project>{605F8CBA-0EAE-403D-B1A2-0C84313FC661}</Project>
+      <Name>JrkExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\pololu_usb_sdk_101119\pololu_usb_sdk\Jrk\Jrk\Jrk.csproj">
+      <Project>{3D47FA7D-926D-45E5-B8B2-CEDC29FEC034}</Project>
+      <Name>Jrk</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Phidget21COM">
+      <Guid>{50484945-4745-5453-0000-000000000000}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

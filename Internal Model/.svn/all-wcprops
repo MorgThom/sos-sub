@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/RoboSub/!svn/ver/36/RoboSub/Internal%20Model
+END
+InternalModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/InternalModel.cs
+END
+IInternalConditionGatherer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/IInternalConditionGatherer.cs
+END
+IInternalConditionListener.cs
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/IInternalConditionListener.cs
+END
+InternalConditions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/InternalConditions.cs
+END
+WeatherBoard.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/WeatherBoard.cs
+END
+ConditionsLogger.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/RoboSub/!svn/ver/36/RoboSub/Internal%20Model/ConditionsLogger.cs
+END
+ModelReturnData.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/RoboSub/!svn/ver/15/RoboSub/Internal%20Model/ModelReturnData.cs
+END
+IMU.cs
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/RoboSub/!svn/ver/33/RoboSub/Internal%20Model/IMU.cs
+END

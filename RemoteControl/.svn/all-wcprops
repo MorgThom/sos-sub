@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl
+END
+BaseGatherer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl/BaseGatherer.cs
+END
+IInputListener.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl/IInputListener.cs
+END
+Xbox360Pad.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl/Xbox360Pad.cs
+END
+OutputToConsole.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl/OutputToConsole.cs
+END
+IInputGatherer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/RoboSub/!svn/ver/15/RoboSub/RemoteControl/IInputGatherer.cs
+END

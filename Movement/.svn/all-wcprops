@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/RoboSub/!svn/ver/39/RoboSub/Movement
+END
+InputTranslation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/RoboSub/!svn/ver/15/RoboSub/Movement/InputTranslation.cs
+END
+Motor.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/RoboSub/!svn/ver/40/RoboSub/Movement/Motor.cs
+END
+HandCodeMotorConstants.cs
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/RoboSub/!svn/ver/33/RoboSub/Movement/HandCodeMotorConstants.cs
+END
+DirectMotorLink.cs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/RoboSub/!svn/ver/42/RoboSub/Movement/DirectMotorLink.cs
+END
+DirectMotorLinkTest.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/RoboSub/!svn/ver/42/RoboSub/Movement/DirectMotorLinkTest.cs
+END
+StopMotors.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/RoboSub/!svn/ver/42/RoboSub/Movement/StopMotors.cs
+END

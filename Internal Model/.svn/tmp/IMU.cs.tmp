@@ -1,0 +1,112 @@
+<<<<<<< .mine
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RoboSub.Internal_Model
+{
+    class IMU
+    {
+        static double xAccel, yAccel, zAccel,
+                      xGyro, yGyro, zGyro,
+                      xMag, yMag, zMag;
+        static System.IO.Ports.SerialPort imuPort;
+        //IMU outputs x,y,z accel, x,y,z gyro, x,y,z mag
+
+        public static void BeginDataSending()
+        {
+            imuPort = new System.IO.Ports.SerialPort("COM4", 57600, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
+            imuPort.Close();
+            imuPort.Open();
+        }
+        public static void UpdateValues()
+        {
+            imuPort.DiscardInBuffer();
+            string data = imuPort.ReadLine();
+            string[] splitData = data.Split(',');
+            xAccel = Double.Parse(splitData[1]);
+            yAccel = Double.Parse(splitData[2]);
+            zAccel = Double.Parse(splitData[3]);
+            xGyro = Double.Parse(splitData[4]);
+            yGyro = Double.Parse(splitData[5]);
+            zGyro = Double.Parse(splitData[6]);
+            xMag = Double.Parse(splitData[7]);
+            yMag = Double.Parse(splitData[8]);
+            zMag = Double.Parse(splitData[9]);
+        }
+        public static void Main()
+        {
+            BeginDataSending();
+            while(true)
+            {
+                UpdateValues();
+                Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8}", xAccel, yAccel, zAccel, xGyro, yGyro, zGyro, xMag, yMag, zMag);
+            }
+        }
+    }
+}
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RoboSub.Internal_Model
+{
+    class IMU
+    {
+       public static double xAccel, yAccel, zAccel,
+                      xGyro, yGyro, zGyro,
+                      xMag, yMag, zMag;
+        static System.IO.Ports.SerialPort imuPort;
+        //IMU outputs x,y,z accel, x,y,z gyro, x,y,z mag
+
+        public static void BeginDataSending()
+        {
+            imuPort = new System.IO.Ports.SerialPort("Com4", 38400, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
+            imuPort.Close();
+            imuPort.Open();
+            imuPort.Write("\x1A\r\n");
+        }
+
+        public static void UpdateValues()
+        {
+            imuPort.DiscardInBuffer();
+            string data = imuPort.ReadLine();
+            data.Replace("$", "");
+            data.Replace("#", "");
+            string[] splitData = data.Split(',');
+            xAccel = Double.Parse(splitData[0]);
+            yAccel = Double.Parse(splitData[1]);
+            zAccel = Double.Parse(splitData[2]);
+            xGyro = Double.Parse(splitData[3]);
+            yGyro = Double.Parse(splitData[4]);
+            zGyro = Double.Parse(splitData[5]);
+            xMag = Double.Parse(splitData[6]);
+            yMag = Double.Parse(splitData[7]);
+            zMag = Double.Parse(splitData[8]);
+        }
+
+        public static void Main()
+        {
+            BeginDataSending();
+            UpdateValues();
+            Console.WriteLine("xAccel: {0}, yAccel: {1}, zAccel:{2}, xGyro: {3}, yGyro: {4}, zGyro:{5}, xMag: {6}, yMag:{7}, zMag: {8}.",
+                              xAccel, yAccel, zAccel, xGyro, yGyro, zGyro, xMag, yMag, zMag);
+        }
+
+        /// <summary>
+        /// Thread entry point for updating values
+        /// </summary>
+        public void ContinuousValueUpdate()
+        {
+            BeginDataSending();
+            while (true)
+            {
+                UpdateValues();
+            }
+        }
+    }
+}
+>>>>>>> .r32

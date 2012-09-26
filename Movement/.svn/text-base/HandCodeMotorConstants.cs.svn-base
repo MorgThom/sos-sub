@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RoboSub.Movement
+{
+    /// <summary>
+    /// Provides a convenient way to build up the list of motors that are connected.
+    /// Should be converted to read from a text file at some point.
+    /// </summary>
+    class HandCodeMotorConstants
+    {
+        public static int STRAIGHT=0, RIGHT=1, BACK=2, LEFT=3;
+        /// <summary>
+        /// Array that contains the information for each of the connected motors.
+        /// </summary>
+        public static MotorInfo[] handCodedMotors = new MotorInfo[8]{ 
+            new MotorInfo("00008367", 1, 1, 0, 0, 1, true, null, "Front Right"),//down
+        new MotorInfo("00008379", -1, -1, 0, 0, 1, true, null, "Back Left"),//down
+        new MotorInfo("00014139", -1, 0, 0, 1, 0, true, null, "Back Strafe"),//lateral
+        new MotorInfo("00014141", 1, 0, 0, 3, 0, true, null, "Forward Strafe"),//lateral
+        new MotorInfo("00015794", -1, 0, 0, 0, 0, true, null, "Left Side"),//forward
+        new MotorInfo("00015787", 1, 0, 0, 0, 0, true, null, "Right Side"),//forward
+        new MotorInfo("00014978", -1, 1, 0, 0, 1, true, null, "Back Right"),//down
+        new MotorInfo("00013557", 1, -1, 0, 0, 1, true, null, "Front Left")};//down
+    }
+
+}
